@@ -1,0 +1,16 @@
+<center>
+<h1>Upload File</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@blob) do |f| %>
+
+      <%= f.file_field :file_input %><br /><br />
+      <%= f.label "Share with" %> <br />
+      <%= f.collection_select(:shared_with, User.all, :id, :username,{}, {:multiple => true}) %> <br />
+
+      <%= f.submit "Upload" %>
+    <% end %>
+  </div>
+</div>
+</center>

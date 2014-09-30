@@ -1,0 +1,10 @@
+<center>
+<h1> Welcome to your own Blobs. These are the files you have uploaded. </h1>
+
+<% @blobs.each do |blob| %>
+	<%= blob.filename %> - <%= link_to "Download", blob %> <br />
+<% end %>
+
+<br />
+<%= link_to "Home", root_path %> - <%= link_to "Own Files", blobs_path %> - <%= link_to "Shared Files", blobs_shared_path %>
+- <%= link_to "Sign out", signout_path, method: "delete" %>

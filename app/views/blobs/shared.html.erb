@@ -1,0 +1,12 @@
+<center>
+<h1> These are files that have been shared with you. </h1>
+
+<% @blobs.each do |blob| %>
+	<%= blob.filename %> - <%= link_to "Download", blob %> - Owner: <%=blob.user.username%> <br />
+<% end %>
+
+<br />
+<br />
+
+<%= link_to "Home", root_path %> - <%= link_to "Own Files", blobs_path %> - <%= link_to "Shared Files", blobs_shared_path %>
+- <%= link_to "Sign out", signout_path, method: "delete" %>
