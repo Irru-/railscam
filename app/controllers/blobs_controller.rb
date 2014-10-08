@@ -4,22 +4,12 @@ class BlobsController < ApplicationController
 		@blob = Blob.new
 	end
 
-	def create
-		file_path = params[:blob][:file_input].tempfile.path
-		sha1 = `./../../camlistore/bin/camput blob #{file_path}`
-		filename = params[:blob][:file_input].original_filename
-		type = params[:blob][:file_input].content_type
-		
+	def create		
 		shared_with = params[:blob][:shared_with]
 		shared_with.shift
 
 		@blob = Blob.new(blob_params)
-		@blob[:filename] = filename
-		@blob[:filetype] = type
-		@blob[:sha1d] = sha1
 		@blob[:user_id] = current_user.id
-
-		logger.debug "Shared_with = #{params[:blob][:shared_with]}"
 
 		params[:blob][:shared_with].each do |id|
 
@@ -59,6 +49,6 @@ class BlobsController < ApplicationController
 	private
 
 		def blob_params
-			params.require(:blob).permit(:filename, :filetype, :extension, :sha1d, :user_id)
+			params.require(:blob).permit(:file_input, :filename, :filetype, :extension, :sha1d, :user_id)
 		end
 end
